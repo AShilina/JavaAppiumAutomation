@@ -657,6 +657,38 @@ public class FirstTest {
         );
     }
 
+    @Test
+    public void testAssertArticleHasTitle()
+    {
+        waitForElementAndClick(
+                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+                "Cannot find 'Search Wikipedia' input",
+                5
+        );
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text,'Search…')]"),
+                "Java",
+                "Cannot find search input",
+                5
+        );
+
+        String article_in_search_results = "//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Object-oriented programming language']";
+
+        waitForElementAndClick(
+                By.xpath(article_in_search_results),
+                "Cannot find 'Object-oriented programming language' in search results",
+                5
+        );
+
+        String article_title_locator = "org.wikipedia:id/view_page_title_text";
+
+        assertElementPresent(
+                By.id(article_title_locator),
+                "There is no title element"
+        );
+    }
+
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds)
     {
         WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
@@ -777,7 +809,7 @@ public class FirstTest {
     {
         int amount_of_elements = getAmountOfElements(by);
         if (amount_of_elements > 0) {
-            String default_message = "An element '" + by.toString() + "' supposed to be not present";
+            String default_message = "An element '" + by.toString() + "' is supposed to be not present";
             throw new AssertionError(default_message + " " + error_message);
         }
     }
@@ -786,5 +818,14 @@ public class FirstTest {
     {
         WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
         return element.getAttribute(attribute);
+    }
+
+    private void assertElementPresent(By by, String error_message)
+    {
+        int amount_of_elements = getAmountOfElements(by);
+        if (amount_of_elements == 0) {
+            String default_message = "An element '" + by.toString() + "' is supposed to be present";
+            throw new AssertionError(default_message + " " + error_message);
+        }
     }
 }
