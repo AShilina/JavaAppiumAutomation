@@ -5,7 +5,6 @@ import lib.ui.ArticlePageObject;
 import lib.ui.MyListsPageObject;
 import lib.ui.NavigationUI;
 import lib.ui.SearchPageObject;
-import org.junit.Assert;
 import org.junit.Test;
 
 public class MyListsTests extends CoreTestCase
@@ -66,7 +65,7 @@ public class MyListsTests extends CoreTestCase
 
         String opened_article_title = ArticlePageObject.getArticleTitle();
 
-        Assert.assertEquals(
+        assertEquals(
                 "We see unexpected title",
                 article_title_second,
                 opened_article_title

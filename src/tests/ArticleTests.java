@@ -3,7 +3,6 @@ package tests;
 import lib.CoreTestCase;
 import lib.ui.ArticlePageObject;
 import lib.ui.SearchPageObject;
-import org.junit.Assert;
 import org.junit.Test;
 
 public class ArticleTests extends CoreTestCase
@@ -20,7 +19,7 @@ public class ArticleTests extends CoreTestCase
         ArticlePageObject ArticlePageObject = new ArticlePageObject(driver);
         String article_title =  ArticlePageObject.getArticleTitle();
 
-        Assert.assertEquals(
+        assertEquals(
                 "We see unexpected title!",
                 "Java (programming language)",
                 article_title
