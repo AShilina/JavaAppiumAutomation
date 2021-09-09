@@ -1,7 +1,6 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 
 public class SearchPageObject extends MainPageObject {
@@ -55,8 +54,8 @@ public class SearchPageObject extends MainPageObject {
         this.waitForElementAndClick(By.xpath(search_result_xpath), "Cannot find and click search result with substring " + substring, 10);
     }
 
-    public int getAmountOfFoundArticles() {
-
+    public int getAmountOfFoundArticles()
+    {
         this.waitForElementPresent(
                 By.xpath(SEARCH_RESULT_ELEMENT),
                 "Cannot find anything by the request ",
