@@ -4,38 +4,36 @@ import io.appium.java_client.AppiumDriver;
 import lib.Platform;
 import org.openqa.selenium.WebElement;
 
-abstract public class ArticlePageObject extends MainPageObject
-{
+abstract public class ArticlePageObject extends MainPageObject {
     protected static String
-        TITLE,
-        FOOTER_ELEMENT,
-        OPTIONS_BUTTON,
-        OPTIONS_ADD_TO_MY_LIST_BUTTON,
-        ADD_TO_MY_LIST_OVERLAY,
-        MY_LIST_NAME_INPUT,
-        MY_LIST_OK_BUTTON,
-        CLOSE_ARTICLE_BUTTON,
-        FOLDER_BY_NAME_TPL;
+            TITLE,
+            FOOTER_ELEMENT,
+            OPTIONS_BUTTON,
+            OPTIONS_ADD_TO_MY_LIST_BUTTON,
+            ADD_TO_MY_LIST_OVERLAY,
+            MY_LIST_NAME_INPUT,
+            MY_LIST_OK_BUTTON,
+            CLOSE_ARTICLE_BUTTON,
+            FOLDER_BY_NAME_TPL,
+            CLOSE_SAVED_ARTICLES_POPUP_BUTTON,
+            SAVED_ARTICLE_LABEL,
+            REMOVE_FROM_READING_LIST_OPTION;
 
     /* TEMPLATES METHODS */
-    private static String getFolderXpathByName(String name_of_folder)
-    {
+    private static String getFolderXpathByName(String name_of_folder) {
         return FOLDER_BY_NAME_TPL.replace("{FOLDER_NAME}", name_of_folder);
     }
     /* TEMPLATES METHODS */
 
-    public ArticlePageObject(AppiumDriver driver)
-    {
+    public ArticlePageObject(AppiumDriver driver) {
         super(driver);
     }
 
-    public WebElement waitForTitleElement()
-    {
+    public WebElement waitForTitleElement() {
         return this.waitForElementPresent(TITLE, "Cannot find article title on page", 15);
     }
 
-    public String getArticleTitle()
-    {
+    public String getArticleTitle() {
         WebElement title_element = waitForTitleElement();
         if (Platform.getInstance().isAndroid()) {
             return title_element.getAttribute("text");
@@ -44,8 +42,7 @@ abstract public class ArticlePageObject extends MainPageObject
         }
     }
 
-    public void swipeToFooter()
-    {
+    public void swipeToFooter() {
         if (Platform.getInstance().isAndroid()) {
             this.swipeUpToFindElement(
                     FOOTER_ELEMENT,
@@ -59,8 +56,7 @@ abstract public class ArticlePageObject extends MainPageObject
         }
     }
 
-    public void addArticleToMyList(String name_of_folder)
-    {
+    public void addArticleToMyList(String name_of_folder) {
         this.waitForElementAndClick(
                 OPTIONS_BUTTON,
                 "Cannot find button to open article options",
@@ -99,8 +95,7 @@ abstract public class ArticlePageObject extends MainPageObject
         );
     }
 
-    public void addArticleToExistingFolder(String name_of_folder)
-    {
+    public void addArticleToExistingFolder(String name_of_folder) {
         this.waitForElementAndClick(
                 OPTIONS_BUTTON,
                 "Cannot find button to open article options",
@@ -121,22 +116,39 @@ abstract public class ArticlePageObject extends MainPageObject
         );
     }
 
-    public void addArticlesToMySaved()
-    {
+    public void addArticlesToMySaved() {
         this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot find option to add article to the reading list", 5);
     }
 
-    public void closeArticle()
-    {
-            this.waitForElementAndClick(
-                    CLOSE_ARTICLE_BUTTON,
-                    "Cannot close article. Cannot find X link",
-                    5
-            );
+    public void closeArticle() {
+        this.waitForElementAndClick(
+                CLOSE_ARTICLE_BUTTON,
+                "Cannot close article. Cannot find X link",
+                5
+        );
     }
 
-    public void assertArticleHasTitle()
-    {
+    public void assertArticleHasTitle() {
         this.assertElementPresent(TITLE, "Cannot find article title on page");
+    }
+
+    public void closeSyncSavedArticlesPopUp() {
+        this.waitForElementAndClick(
+                CLOSE_SAVED_ARTICLES_POPUP_BUTTON,
+                "Cannot find a button to close popup",
+                5
+        );
+    }
+
+    public void assertArticleIsAddedToSaved(String article_title) {
+        if (Platform.getInstance().isAndroid()) {
+            waitForElementAndClick(SAVED_ARTICLE_LABEL, "Cannot find saved article label", 5);
+            waitForElementPresent(REMOVE_FROM_READING_LIST_OPTION, "The article doesn't seem to be saved. Cannot find 'Remove' option", 5);
+        } else {
+            this.waitForElementPresent(
+                    SAVED_ARTICLE_LABEL,
+                    "The article doesn't seem to be saved"
+            );
+        }
     }
 }

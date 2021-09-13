@@ -7,8 +7,7 @@ abstract public class MyListsPageObject extends MainPageObject
 {
     protected static String
             FOLDER_BY_NAME_TPL,
-            ARTICLE_BY_TITLE_TPL,
-            CLOSE_SAVED_ARTICLES_POPUP_BUTTON;
+            ARTICLE_BY_TITLE_TPL;
 
     /* TEMPLATES METHODS */
     private static String getFolderXpathByName(String name_of_folder)
@@ -37,15 +36,6 @@ abstract public class MyListsPageObject extends MainPageObject
         );
     }
 
-    public void closeSyncSavedArticlesPopUp()
-    {
-        this.waitForElementAndClick(
-            CLOSE_SAVED_ARTICLES_POPUP_BUTTON,
-            "Cannot find a button to close popup",
-            5
-    );
-    }
-
     public void waitForArticleToAppearByTitle(String article_title)
     {
         String article_xpath = getSavedArticleXpathByTitle(article_title);
@@ -72,7 +62,7 @@ abstract public class MyListsPageObject extends MainPageObject
         this.waitForArticleToDisappearByTitle(article_title);
     }
 
-    public void openSavedArticleFromFolder(String article_title)
+    public void openSavedArticle(String article_title)
     {
         String saved_article_xpath = getSavedArticleXpathByTitle(article_title);
         this.waitForElementAndClick(

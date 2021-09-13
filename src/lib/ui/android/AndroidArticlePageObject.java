@@ -15,6 +15,8 @@ public class AndroidArticlePageObject extends ArticlePageObject
         MY_LIST_OK_BUTTON = "xpath://*[@text='OK']";
         CLOSE_ARTICLE_BUTTON = "xpath://android.widget.ImageButton[@content-desc='Navigate up']";
         FOLDER_BY_NAME_TPL = "xpath://*[@text='{FOLDER_NAME}']";
+        SAVED_ARTICLE_LABEL = "xpath://android.widget.ImageView[@content-desc='Add this article to a reading list']";
+        REMOVE_FROM_READING_LIST_OPTION = "xpath://*[contains(@text,'Remove from')]";
     }
 
     public AndroidArticlePageObject(AppiumDriver driver)

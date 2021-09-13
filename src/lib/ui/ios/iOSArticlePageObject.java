@@ -11,6 +11,8 @@ public class iOSArticlePageObject extends ArticlePageObject
         OPTIONS_ADD_TO_MY_LIST_BUTTON = "id:Save for later";
         CLOSE_ARTICLE_BUTTON = "id:Back";
         FOLDER_BY_NAME_TPL = "xpath://*[@text='{FOLDER_NAME}']";
+        CLOSE_SAVED_ARTICLES_POPUP_BUTTON = "xpath://XCUIElementTypeButton[@name='places auth close']";
+        SAVED_ARTICLE_LABEL = "id:Saved. Activate to unsave.";
     }
 
     public iOSArticlePageObject(AppiumDriver driver)
