@@ -140,7 +140,7 @@ abstract public class ArticlePageObject extends MainPageObject {
         );
     }
 
-    public void assertArticleIsAddedToSaved(String article_title) {
+    public void assertArticleIsAddedToSaved() {
         if (Platform.getInstance().isAndroid()) {
             waitForElementAndClick(SAVED_ARTICLE_LABEL, "Cannot find saved article label", 5);
             waitForElementPresent(REMOVE_FROM_READING_LIST_OPTION, "The article doesn't seem to be saved. Cannot find 'Remove' option", 5);

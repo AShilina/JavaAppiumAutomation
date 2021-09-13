@@ -104,6 +104,6 @@ public class MyListsTests extends CoreTestCase {
 
         MyListsPageObject.swipeByArticleToDelete(article_title_first);
         MyListsPageObject.openSavedArticle(article_title_second);
-        ArticlePageObject.assertArticleIsAddedToSaved(article_title_second);
+        ArticlePageObject.assertArticleIsAddedToSaved();
     }
 }
